@@ -10,8 +10,7 @@ namespace ECS
             dstManager.AddComponentData(entity, new Cat
             {
                 hunger = 0,
-                tiredness = 0,
-                currentState = FsmState.Null
+                tiredness = 0
             });
         }
     }

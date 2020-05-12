@@ -47,7 +47,7 @@ namespace ECS
 
             Entities.ForEach((Entity entity,
                 int entityInQueryIndex,
-                ref Cat cat,
+                ref CatFiniteStateMachine fsm,
                 in FsmStateChanged stateChanged) =>
             {
                 switch( stateChanged.from )
@@ -63,7 +63,9 @@ namespace ECS
                         break;
                 }
 
-                switch( stateChanged.to )
+                fsm.currentState = stateChanged.to;
+
+                switch ( stateChanged.to )
                 {
                     case FsmState.Play:
                         {
@@ -94,7 +96,6 @@ namespace ECS
                         }
                         break;
                 }
-                cat.currentState = stateChanged.to;
 
                 ecbConcurrent.RemoveComponent<FsmStateChanged>(entityInQueryIndex, entity);
 

@@ -32,13 +32,13 @@ namespace ECS
     }
     struct CatFiniteStateMachine : IComponentData
     {
+        public FsmState currentState;
     }
 
     struct Cat : IComponentData
     {
         public float hunger;// 0: not hungry, 100: hungry to death
         public float tiredness;// 0: not tired, 100: tired to death
-        public FsmState currentState;
     }
 #pragma warning restore 0649
 }
