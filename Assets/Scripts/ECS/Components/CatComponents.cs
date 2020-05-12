@@ -25,6 +25,14 @@ namespace ECS
         public float hungerCostPerSecond;
         public float tirednessCostPerSecond;
     }
+    struct FsmStateChanged : IComponentData
+    {
+        public FsmState from;
+        public FsmState to;
+    }
+    struct CatFiniteStateMachine : IComponentData
+    {
+    }
 
     struct Cat : IComponentData
     {

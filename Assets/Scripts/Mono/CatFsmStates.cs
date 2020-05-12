@@ -87,6 +87,7 @@ namespace Mono
 
         public Type ShoudExit()
         {
+            // slept enough
             if (_catBehavior.Tireness < 10f)
             {
                 return typeof(PlayState);

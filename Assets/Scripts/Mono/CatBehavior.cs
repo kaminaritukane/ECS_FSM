@@ -20,6 +20,7 @@ namespace Mono
                 new SleepState(this),
                 new EatState(this)
             };
+            // starts from play
             _catFsm = new CatFsm(allStates[0], allStates);
         }
 
