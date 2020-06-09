@@ -3,29 +3,29 @@ using UnityEngine;
 
 namespace ECS.Utility.Sample
 {
-    public class TestStates : MonoBehaviour, IConvertGameObjectToEntity
+    public partial class TestStates : MonoBehaviour, IConvertGameObjectToEntity
     {
         public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
         {
             dstManager.AddComponent<TestPlayState>(entity);
         }
 
-        public struct TestPlayState : IComponentData
+        private struct TestPlayState : IComponentData
         {
             public float value;
         }
 
-        public struct TestPlayStateSystemState : ISystemStateComponentData
+        private struct TestPlayStateSystemState : ISystemStateComponentData
         {
 
         }
 
-        public struct TestSleepState : IComponentData
+        private struct TestSleepState : IComponentData
         {
             public float value;
         }
 
-        public struct TestSleepStateSystemState : ISystemStateComponentData
+        private struct TestSleepStateSystemState : ISystemStateComponentData
         {
 
         }

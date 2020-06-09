@@ -4,10 +4,10 @@ namespace ECS.Utility
 {
     public abstract class FsmStateSystemBase : SystemBase
     {
-        protected abstract void OnStateEnter(EntityCommandBuffer ecb);
-        protected abstract void OnStateUpdate(EntityCommandBuffer ecb);
-        protected abstract void ShouldExit(EntityCommandBuffer ecb);
-        protected abstract void OnStateExit(EntityCommandBuffer ecb);
+        protected abstract void OnStateEnter(EntityCommandBuffer.Concurrent ecbConcurrent);
+        protected abstract void OnStateUpdate(EntityCommandBuffer.Concurrent ecbConcurrent);
+        protected abstract void ShouldExit(EntityCommandBuffer.Concurrent ecbConcurrent);
+        protected abstract void OnStateExit(EntityCommandBuffer.Concurrent ecbConcurrent);
 
         private EndSimulationEntityCommandBufferSystem _endSimulationECBSystem;
 
@@ -21,11 +21,14 @@ namespace ECS.Utility
         protected override void OnUpdate()
         {
             var endSimulationCMB = _endSimulationECBSystem.CreateCommandBuffer();
+            var ecbConcurrent = endSimulationCMB.ToConcurrent();
 
-            OnStateEnter(endSimulationCMB);
-            OnStateUpdate(endSimulationCMB);
-            ShouldExit(endSimulationCMB);
-            OnStateExit(endSimulationCMB);
+            OnStateEnter(ecbConcurrent);
+            OnStateUpdate(ecbConcurrent);
+            ShouldExit(ecbConcurrent);
+            OnStateExit(ecbConcurrent);
+
+            _endSimulationECBSystem.AddJobHandleForProducer(Dependency);
         }
     }
 }
